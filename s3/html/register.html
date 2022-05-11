@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>LinkedIn Website</title>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css">
+	<link rel="stylesheet" href="index.css">
+  <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+  <script src="https://rawgit.com/aws/amazon-cognito-identity-js/master/dist/aws-cognito-sdk.min.js"></script>
+  <script src="https://rawgit.com/aws/amazon-cognito-identity-js/master/dist/amazon-cognito-identity.min.js"></script>
+  <script src="../js/config.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
+</head>
+<body>
+<section class="vh-100" style="background-color: #508bfc;">
+  <div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+        <div class="card shadow-2-strong" style="border-radius: 1rem;">
+          <div class="card-body p-5 text-center">
+
+            <h3 class="mb-5">Sign in</h3>
+
+            <div class="form-outline mb-4">
+              <input type="email" id="email" class="form-control form-control-lg" />
+              <label class="form-label" for="email">Email</label>
+            </div>
+
+            <div class="form-outline mb-4">
+                <input type="text" id="name" class="form-control form-control-lg" />
+                <label class="form-label" for="name">Name</label>
+            </div>
+
+            <div class="form-outline mb-4">
+                <input type="password" id="password" class="form-control form-control-lg" />
+                <label class="form-label" for="password">Password</label>
+            </div>
+
+            <div class="form-outline mb-4">
+                <input type="password" id="confirmpassword" class="form-control form-control-lg" />
+                <label class="form-label" for="confirmpassword">Confirm Password</label>
+            </div>
+
+            <!-- Checkbox -->
+            <div class="form-check d-flex justify-content-start mb-4">
+              <input class="form-check-input" type="checkbox" value="" id="form1Example3" />
+              <label class="form-check-label" for="form1Example3"> Remember password </label>
+            </div>
+
+            <button id="submitRegister" class="btn btn-primary btn-lg btn-block" type="submit" onclick="registerButton()">Sign Up</button>
+
+            <hr class="my-4">
+
+            <button class="btn btn-lg btn-block btn-primary" style="background-color: #dd4b39;"
+              type="submit"><i class="fab fa-google me-2"></i>Sign in with google</button>
+
+            <p id="titleheader"></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<script>
+  var name;
+  var password;
+  var confirmpassword;
+  var email;
+  function registerButton() {
+    name = document.getElementById("name").value;
+    password = document.getElementById("password").value;
+    confirmpassword = document.getElementById("confirmpassword").value;
+    email = document.getElementById("email").value;
+    if(name == "" || password == "" || confirmpassword == "" || email == "") {
+      alert("Please fill all the fields");
+    }
+    else if(password != confirmpassword) {
+      alert("Passwords do not match");
+    }
+    else {
+      register();
+    }
+
+  }
+
+  function register(){
+    var poolData = {
+      UserPoolId: _config.cognito.userPoolId,
+      ClientId: _config.cognito.userPoolClientId
+    };
+    var userPool = new AmazonCognitoIdentity.CognitoUserPool(poolData);
+
+    var attributeList = [];
+    var dataEmail = {
+      Name: 'email',
+      Value: email,
+    };
+
+    var dataPersonalName = {
+      Name: 'name',
+      Value: name,
+    };
+
+    var attributeEmail = new AmazonCognitoIdentity.CognitoUserAttribute(dataEmail);
+    var attributePersonalName = new AmazonCognitoIdentity.CognitoUserAttribute(dataPersonalName);
+
+    attributeList.push(attributeEmail);
+    attributeList.push(attributePersonalName);
+
+    userPool.signUp(email, password, attributeList, null, function(err, result) {
+      if (err) {
+        alert(err.message || JSON.stringify(err));
+        return;
+      }
+      cognitoUser = result.user;
+      console.log('user name is ' + cognitoUser.getUsername());
+      
+      document.getElementById("titleheader").innerHTML = "Check your email for confirmation link.";
+    });
+  }
+    
+</script>
+</body>
+</html>>
