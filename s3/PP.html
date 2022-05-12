@@ -90,7 +90,16 @@
                       <h6 class="mb-0">Full Name</h6>
                     </div>
                     <div class="col-sm-9 text-secondary">
-                      <p id="name">Kenneth Valdez</p>
+                      <p id="name">John Doe</p>
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <h6 class="mb-0">Headline</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                      <p id="headline"></p>
                     </div>
                   </div>
                   <hr>
@@ -99,7 +108,7 @@
                       <h6 class="mb-0">Email</h6>
                     </div>
                     <div class="col-sm-9 text-secondary">
-                      fip@jukmuh.al
+                      <p id="email"></p>
                     </div>
                   </div>
                   <hr>
@@ -108,87 +117,45 @@
                       <h6 class="mb-0">Phone</h6>
                     </div>
                     <div class="col-sm-9 text-secondary">
-                      (239) 816-9029
+                      <p id="phone"></p>
                     </div>
                   </div>
                   <hr>
-                  <div class="row">
-                    <div class="col-sm-3">
-                      <h6 class="mb-0">Mobile</h6>
-                    </div>
-                    <div class="col-sm-9 text-secondary">
-                      (320) 380-4539
-                    </div>
-                  </div>
                   <hr>
                   <div class="row">
                     <div class="col-sm-3">
                       <h6 class="mb-0">Address</h6>
                     </div>
                     <div class="col-sm-9 text-secondary">
-                      Bay Area, San Francisco, CA
+                      <p id="address"></p>
                     </div>
                   </div>
                   <hr>
                   <div class="row">
                     <div class="col-sm-12">
-                      <a class="btn btn-info " target="__blank" href="https://www.bootdey.com/snippets/view/profile-edit-data-and-skills">Edit</a>
+                      <button class="btn btn-info" id="edit">Edit</button>
                     </div>
                   </div>
                 </div>
               </div>
 
-              <div class="row gutters-sm">
-                <div class="col-sm-6 mb-3">
-                  <div class="card h-100">
-                    <div class="card-body">
-                      <h6 class="d-flex align-items-center mb-3"><i class="material-icons text-info mr-2"></i>Skills</h6>
-                      <small>Web Design</small>
-                      <div class="progress mb-3" style="height: 5px">
-                        <div class="progress-bar bg-primary" role="progressbar" style="width: 80%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
-                      </div>
-                      <small>Website Markup</small>
-                      <div class="progress mb-3" style="height: 5px">
-                        <div class="progress-bar bg-primary" role="progressbar" style="width: 72%" aria-valuenow="72" aria-valuemin="0" aria-valuemax="100"></div>
-                      </div>
-                      <small>One Page</small>
-                      <div class="progress mb-3" style="height: 5px">
-                        <div class="progress-bar bg-primary" role="progressbar" style="width: 89%" aria-valuenow="89" aria-valuemin="0" aria-valuemax="100"></div>
-                      </div>
-                      <small>Mobile Template</small>
-                      <div class="progress mb-3" style="height: 5px">
-                        <div class="progress-bar bg-primary" role="progressbar" style="width: 55%" aria-valuenow="55" aria-valuemin="0" aria-valuemax="100"></div>
-                      </div>
-                      <small>Backend API</small>
-                      <div class="progress mb-3" style="height: 5px">
-                        <div class="progress-bar bg-primary" role="progressbar" style="width: 66%" aria-valuenow="66" aria-valuemin="0" aria-valuemax="100"></div>
+                  <div class="row gutters-sm">
+                    <div class="col-sm-6 mb-3">
+                      <div class="card h-100">
+                        <div class="card-body">
+                          <h6 class="d-flex align-items-center mb-3"><i class="material-icons text-info mr-2"></i>Skills</h6>                      
+                          <p class="d-flex" style="width:100%; height: 100%" id="skills">
+                          </p>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                </div>
-                <div class="col-sm-6 mb-3">
-                  <div class="card h-100">
-                    <div class="card-body">
-                      <h6 class="d-flex align-items-center mb-3"><i class="material-icons text-info mr-2"></i>Experience</h6>
-                      <small>Web Design</small>
-                      <div class="progress mb-3" style="height: 5px">
-                        <div class="progress-bar bg-primary" role="progressbar" style="width: 80%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
-                      </div>
-                      <small>Website Markup</small>
-                      <div class="progress mb-3" style="height: 5px">
-                        <div class="progress-bar bg-primary" role="progressbar" style="width: 72%" aria-valuenow="72" aria-valuemin="0" aria-valuemax="100"></div>
-                      </div>
-                      <small>One Page</small>
-                      <div class="progress mb-3" style="height: 5px">
-                        <div class="progress-bar bg-primary" role="progressbar" style="width: 89%" aria-valuenow="89" aria-valuemin="0" aria-valuemax="100"></div>
-                      </div>
-                      <small>Mobile Template</small>
-                      <div class="progress mb-3" style="height: 5px">
-                        <div class="progress-bar bg-primary" role="progressbar" style="width: 55%" aria-valuenow="55" aria-valuemin="0" aria-valuemax="100"></div>
-                      </div>
-                      <small>Backend API</small>
-                      <div class="progress mb-3" style="height: 5px">
-                        <div class="progress-bar bg-primary" role="progressbar" style="width: 66%" aria-valuenow="66" aria-valuemin="0" aria-valuemax="100"></div>
+                    <div class="col-sm-6 mb-3">
+                      <div class="card h-100">
+                        <div class="card-body">
+                          <h6 class="d-flex align-items-center mb-3"><i class="material-icons text-info mr-2"></i>Experience</h6>
+                          <p class="d-flex" style="width:100%; height: 100%" id="experience"> 
+                          </p>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -207,11 +174,7 @@
       }
       var userAttributes;
       var userPool = new AmazonCognitoIdentity.CognitoUserPool(data);
-      // console.log(userPool);
-      
-      //get email field from window hash
       var queryString = window.location.search;
-      // console.log(queryString);
       const urlParams = new URLSearchParams(queryString);
       const email = urlParams.get("email");
       const access_token = urlParams.get("access_token");
@@ -231,8 +194,20 @@
 
       function updateData(userAttributes){
         console.log(userAttributes);
-        document.getElementById("name").innerHTML = userAttributes.data.email;
+        document.getElementById("email").innerHTML = userAttributes.data.email;
+        document.getElementById("name").innerHTML = userAttributes.data.name;
+        document.getElementById("headline").innerHTML = userAttributes.data.headline;
+        document.getElementById("phone").innerHTML = userAttributes.data.phone;
+        document.getElementById("address").innerHTML = userAttributes.data.address;
+        document.getElementById("skills").innerHTML = userAttributes.data.skills;
+        document.getElementById("experience").innerHTML = userAttributes.data.experience;
       }
+
+      function edit_profile(email, access_token){
+        window.location.href = "PP_edit.html"+"?email="+email+"&access_token="+access_token;
+      }
+      
+
 
       window.onload = function(){
         var params = {
@@ -241,8 +216,6 @@
         // get response from lambda using apigClient
         vals = apigClient.profileGet(params)
         .then((response) => response);
-        
-        // apiclient with promise
 
         apigClient.profileGet(params)
         .then(function(result){
@@ -254,7 +227,7 @@
         }).catch( function(result){
           // Add error callback code here.
           console.log(result);
-        });        
+        });
 
         if(cognitoUser != null){
           console.log("HI");

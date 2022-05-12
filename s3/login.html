@@ -75,7 +75,7 @@
                 localStorage.setItem("access_token", result.getAccessToken().getJwtToken());
                 console.log("LS AT:"+localStorage.getItem("access_token"));
                 //send email id to PP.html
-                window.location.href = "../html/PP.html"+"?email="+$('#email').val() + "&access_token=" + result.getAccessToken().getJwtToken();
+                window.location.href = "PP.html"+"?email="+$('#email').val() + "&access_token=" + result.getAccessToken().getJwtToken();
             },
             onFailure: function (err) {
                 alert(err || JSON.stringify(err));

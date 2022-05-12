@@ -27,19 +27,58 @@ def lambda_handler(event, context):
         credentials = boto3.Session().get_credentials()
         user_details = dbtable.get_item(Key={'email': event['queryStringParameters']['email']})
         print(user_details)
+        email = user_details.get('Item').get('email')
+
+        try:
+            name = list(user_details.get('Item').get('name'))
+        except:
+            name = 'None'
+        try:
+            address = list(user_details.get('Item').get('address'))
+        except:
+            address = 'None'
+        try:
+            experience = list(user_details.get('Item').get('experience'))
+        except:
+            experience = 'None'
+        try:
+            mobile = list(user_details.get('Item').get('mobile'))
+        except:
+            mobile = 'None'
+        try:
+            phone = list(user_details.get('Item').get('phone'))
+        except:
+            phone = 'None'
+        try:
+            skills = list(user_details.get('Item').get('skills'))
+        except:
+            skills = 'None'
+        try:
+            access_token = list(user_details.get('Item').get('access_token'))
+        except:
+            access_token = ''
+        print(name)
+        print(address)
+        print(experience)
+        print(mobile)
+        print(phone)
+        print(skills)
+        print(access_token)
+        print(email)
         
-        val = user_details.get('Item').get('Name')
-        print(type(val))
-        json_object = {
-            "email" : user_details.get('Item').get('email')
-        }
-        print(json_object)
+
         val = {
             'statusCode': 200,
             'headers': {'Access-Control-Allow-Origin':'*'},
             'body': json.dumps({
-                'email': user_details.get('Item').get('email'),
-                # 'Name': "neel"
+                "email" : email,
+                "name" : name,
+                "address" : address,
+                "experience" : experience,
+                "mobile" : mobile,
+                "phone" : phone,
+                "skills" : skills,
+                "access_token" : access_token,
             }),
             'isBase64Encoded': False
         }

@@ -98,7 +98,7 @@
                       <h6 class="mb-0">Email</h6>
                     </div>
                     <div class="col-sm-9 text-secondary">
-                      <input class="col-sm-9 text-secondary" type="text" id="email" value=""></p>
+                      <p class="col-sm-9 text-secondary" type="text" id="email" value=""></p>
                     </div>
                   </div>
                   <hr>
@@ -148,7 +148,7 @@
 
             <div class="row">
               <div class="col-sm-12">
-                <a class="btn btn-info " target="__blank" href="">Submit</a>
+                <a class="btn btn-info " target="__blank" onclick="edit_profile()">Submit</a>
               </div>
             </div>
           </div>
@@ -186,26 +186,14 @@
       };
 
       const cognitoUser = new AmazonCognitoIdentity.CognitoUser(userData);
-      // cognitoUser.authenticateUser(authenticationDetails, {
-      //   onSuccess: function(result) {
-      //     const accesstoken = result.getIdToken().getJwtToken();
-      //     const refreshtoken = result.getRefreshToken().getToken();
-      //     callback(null, { accesstoken, refreshtoken });    
-      //   },
-      // onFailure: function(err) {
-      //   callback(err);
-      //   },
-      // });
   
       window.onload = function(){
-        console.log("CODDD"+cognitoUser)
         if(cognitoUser != null){
-          console.log("HI");
-          document.getElementById('username').innerHTML = email;
-        
+          console.log("On Load");
+          
         }else{
           alert("User not logged in");
-          //reditrect to login page
+          //reditrect to login page 
           window.location.href = "login.html";
         }
       }
