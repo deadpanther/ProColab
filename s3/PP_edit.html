@@ -161,6 +161,18 @@
         UserPoolId: _config.cognito.userPoolId,
         ClientId: _config.cognito.userPoolClientId
       }
+      function edit_profile(){
+        var email = URLSearchParams().get('email');
+        var name = document.getElementById('name').value;
+        var headline = document.getElementById('headline').value;
+        var phone = document.getElementById('phone').value;
+        var address = document.getElementById('address').value;
+        var skills = document.getElementById('skills').value;
+        var experience = document.getElementById('experience').value;
+        var params = {
+          
+        }
+      }
 
       var userPool = new AmazonCognitoIdentity.CognitoUserPool(data);
       console.log(userPool);

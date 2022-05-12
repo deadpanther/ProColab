@@ -155,39 +155,39 @@ apigClientFactory.newClient = function (config) {
     };
     
     
-    apigClient.discussionforumPostdiscussionPost = function (params, body, additionalParams) {
+    apigClient.discussionforumPostdisPost = function (params, body, additionalParams) {
         if(additionalParams === undefined) { additionalParams = {}; }
         
         apiGateway.core.utils.assertParametersDefined(params, [], ['body']);
         
-        var discussionforumPostdiscussionPostRequest = {
+        var discussionforumPostdisPostRequest = {
             verb: 'post'.toUpperCase(),
-            path: pathComponent + uritemplate('/discussionforum/postdiscussion').expand(apiGateway.core.utils.parseParametersToObject(params, [])),
+            path: pathComponent + uritemplate('/discussionforum/postdis').expand(apiGateway.core.utils.parseParametersToObject(params, [])),
             headers: apiGateway.core.utils.parseParametersToObject(params, []),
             queryParams: apiGateway.core.utils.parseParametersToObject(params, []),
             body: body
         };
         
         
-        return apiGatewayClient.makeRequest(discussionforumPostdiscussionPostRequest, authType, additionalParams, config.apiKey);
+        return apiGatewayClient.makeRequest(discussionforumPostdisPostRequest, authType, additionalParams, config.apiKey);
     };
     
     
-    apigClient.discussionforumPostdiscussionOptions = function (params, body, additionalParams) {
+    apigClient.discussionforumPostdisOptions = function (params, body, additionalParams) {
         if(additionalParams === undefined) { additionalParams = {}; }
         
         apiGateway.core.utils.assertParametersDefined(params, [], ['body']);
         
-        var discussionforumPostdiscussionOptionsRequest = {
+        var discussionforumPostdisOptionsRequest = {
             verb: 'options'.toUpperCase(),
-            path: pathComponent + uritemplate('/discussionforum/postdiscussion').expand(apiGateway.core.utils.parseParametersToObject(params, [])),
+            path: pathComponent + uritemplate('/discussionforum/postdis').expand(apiGateway.core.utils.parseParametersToObject(params, [])),
             headers: apiGateway.core.utils.parseParametersToObject(params, []),
             queryParams: apiGateway.core.utils.parseParametersToObject(params, []),
             body: body
         };
         
         
-        return apiGatewayClient.makeRequest(discussionforumPostdiscussionOptionsRequest, authType, additionalParams, config.apiKey);
+        return apiGatewayClient.makeRequest(discussionforumPostdisOptionsRequest, authType, additionalParams, config.apiKey);
     };
     
     
@@ -224,6 +224,24 @@ apigClientFactory.newClient = function (config) {
         
         
         return apiGatewayClient.makeRequest(discussionforumPostlikesOptionsRequest, authType, additionalParams, config.apiKey);
+    };
+    
+    
+    apigClient.postDiscussionThreadOptions = function (params, body, additionalParams) {
+        if(additionalParams === undefined) { additionalParams = {}; }
+        
+        apiGateway.core.utils.assertParametersDefined(params, [], ['body']);
+        
+        var postDiscussionThreadOptionsRequest = {
+            verb: 'options'.toUpperCase(),
+            path: pathComponent + uritemplate('/postDiscussionThread').expand(apiGateway.core.utils.parseParametersToObject(params, [])),
+            headers: apiGateway.core.utils.parseParametersToObject(params, []),
+            queryParams: apiGateway.core.utils.parseParametersToObject(params, []),
+            body: body
+        };
+        
+        
+        return apiGatewayClient.makeRequest(postDiscussionThreadOptionsRequest, authType, additionalParams, config.apiKey);
     };
     
     
