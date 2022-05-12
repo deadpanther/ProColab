@@ -10,10 +10,22 @@
   <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
   <script src="https://rawgit.com/aws/amazon-cognito-identity-js/master/dist/aws-cognito-sdk.min.js"></script>
   <script src="https://rawgit.com/aws/amazon-cognito-identity-js/master/dist/amazon-cognito-identity.min.js"></script>
-  <script src="../js/config.js"></script>
+  <script type="text/javascript" src="apiGateway-js-sdk/lib/axios/dist/axios.standalone.js"></script>
+  <script type="text/javascript" src="apiGateway-js-sdk/lib/CryptoJS/rollups/hmac-sha256.js"></script>
+  <script type="text/javascript" src="apiGateway-js-sdk/lib/CryptoJS/rollups/sha256.js"></script>
+  <script type="text/javascript" src="apiGateway-js-sdk/lib/CryptoJS/components/hmac.js"></script>
+  <script type="text/javascript" src="apiGateway-js-sdk/lib/CryptoJS/components/enc-base64.js"></script>
+  <script type="text/javascript" src="apiGateway-js-sdk/lib/url-template/url-template.js"></script>
+  <script type="text/javascript" src="apiGateway-js-sdk/lib/apiGatewayCore/sigV4Client.js"></script>
+  <script type="text/javascript" src="apiGateway-js-sdk/lib/apiGatewayCore/apiGatewayClient.js"></script>
+  <script type="text/javascript" src="apiGateway-js-sdk/lib/apiGatewayCore/simpleHttpClient.js"></script>
+  <script type="text/javascript" src="apiGateway-js-sdk/lib/apiGatewayCore/utils.js"></script>
+  <script type="text/javascript" src="apiGateway-js-sdk/apigClient.js"></script>
+  <script src="js/config.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
+  <script type="text/javascript" src="apiGateway-js-sdk/apigClient.js"></script>
 </head>
 <body>
 <div class="container">
@@ -78,7 +90,7 @@
                       <h6 class="mb-0">Full Name</h6>
                     </div>
                     <div class="col-sm-9 text-secondary">
-                      Kenneth Valdez
+                      <p id="name">Kenneth Valdez</p>
                     </div>
                   </div>
                   <hr>
@@ -193,9 +205,9 @@
         UserPoolId: _config.cognito.userPoolId,
         ClientId: _config.cognito.userPoolClientId
       }
-
+      var userAttributes;
       var userPool = new AmazonCognitoIdentity.CognitoUserPool(data);
-      console.log(userPool);
+      // console.log(userPool);
       
       //get email field from window hash
       var queryString = window.location.search;
@@ -205,44 +217,56 @@
       const access_token = urlParams.get("access_token");
 
       localStorage.setItem("email", email);
-      // const authenticationDetails = new AmazonCognitoIdentity.AuthenticationDetails(
-      //   {
-      //     Username: email,
-      //     Password: "",
-      // );
-      //   },
+      
       console.log(localStorage.getItem("email"));
+      localStorage.setItem("access_token", access_token);
       const userData = {
         Username: email,
         Pool: userPool,
       };
 
       const cognitoUser = new AmazonCognitoIdentity.CognitoUser(userData);
-      // cognitoUser.authenticateUser(authenticationDetails, {
-      //   onSuccess: function(result) {
-      //     const accesstoken = result.getIdToken().getJwtToken();
-      //     const refreshtoken = result.getRefreshToken().getToken();
-      //     callback(null, { accesstoken, refreshtoken });    
-      //   },
-      // onFailure: function(err) {
-      //   callback(err);
-      //   },
-      // });
-    
-      console.log("Cognito"+cognitoUser);
+
+      var apigClient = apigClientFactory.newClient();
+
+      function updateData(userAttributes){
+        console.log(userAttributes);
+        document.getElementById("name").innerHTML = userAttributes.data.email;
+      }
 
       window.onload = function(){
-        console.log("CODDD"+cognitoUser)
+        var params = {
+          email: email
+        };
+        // get response from lambda using apigClient
+        vals = apigClient.profileGet(params)
+        .then((response) => response);
+        
+        // apiclient with promise
+
+        apigClient.profileGet(params)
+        .then(function(result){
+          // Add success callback code here.
+          console.log("Promise success");
+          // save response to local storage
+          userAttributes = result;
+          updateData(userAttributes);
+        }).catch( function(result){
+          // Add error callback code here.
+          console.log(result);
+        });        
+
         if(cognitoUser != null){
           console.log("HI");
-            
+          console.log("RESULT", userAttributes);
           document.getElementById('username').innerHTML = email;
         
         }else{
           alert("User not logged in");
-          //reditrect to login page
+          //redirect to login page
           window.location.href = "login.html";
         }
+        
       }
       
     </script>

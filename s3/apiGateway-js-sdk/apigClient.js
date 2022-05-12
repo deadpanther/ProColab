@@ -18,10 +18,10 @@ apigClientFactory.newClient = function (config) {
     var apigClient = { };
     if(config === undefined) {
         config = {
-            accessKey: '',
-            secretKey: '',
+            accessKey: 'AKIA5HYBIAG5IXDQEBPC',
+            secretKey: '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',
             sessionToken: '',
-            region: '',
+            region: 'us-east-1',
             apiKey: undefined,
             defaultContentType: 'application/json',
             defaultAcceptType: 'application/json'
@@ -98,6 +98,150 @@ apigClientFactory.newClient = function (config) {
         
         
         return apiGatewayClient.makeRequest(discussionforumOptionsRequest, authType, additionalParams, config.apiKey);
+    };
+    
+    
+    apigClient.discussionforumGetdiscusionGet = function (params, body, additionalParams) {
+        if(additionalParams === undefined) { additionalParams = {}; }
+        
+        apiGateway.core.utils.assertParametersDefined(params, [], ['body']);
+        
+        var discussionforumGetdiscusionGetRequest = {
+            verb: 'get'.toUpperCase(),
+            path: pathComponent + uritemplate('/discussionforum/getdiscusion').expand(apiGateway.core.utils.parseParametersToObject(params, [])),
+            headers: apiGateway.core.utils.parseParametersToObject(params, []),
+            queryParams: apiGateway.core.utils.parseParametersToObject(params, []),
+            body: body
+        };
+        
+        
+        return apiGatewayClient.makeRequest(discussionforumGetdiscusionGetRequest, authType, additionalParams, config.apiKey);
+    };
+    
+    
+    apigClient.discussionforumGetdiscusionOptions = function (params, body, additionalParams) {
+        if(additionalParams === undefined) { additionalParams = {}; }
+        
+        apiGateway.core.utils.assertParametersDefined(params, [], ['body']);
+        
+        var discussionforumGetdiscusionOptionsRequest = {
+            verb: 'options'.toUpperCase(),
+            path: pathComponent + uritemplate('/discussionforum/getdiscusion').expand(apiGateway.core.utils.parseParametersToObject(params, [])),
+            headers: apiGateway.core.utils.parseParametersToObject(params, []),
+            queryParams: apiGateway.core.utils.parseParametersToObject(params, []),
+            body: body
+        };
+        
+        
+        return apiGatewayClient.makeRequest(discussionforumGetdiscusionOptionsRequest, authType, additionalParams, config.apiKey);
+    };
+    
+    
+    apigClient.discussionforumPostcommentsPost = function (params, body, additionalParams) {
+        if(additionalParams === undefined) { additionalParams = {}; }
+        
+        apiGateway.core.utils.assertParametersDefined(params, [], ['body']);
+        
+        var discussionforumPostcommentsPostRequest = {
+            verb: 'post'.toUpperCase(),
+            path: pathComponent + uritemplate('/discussionforum/postcomments').expand(apiGateway.core.utils.parseParametersToObject(params, [])),
+            headers: apiGateway.core.utils.parseParametersToObject(params, []),
+            queryParams: apiGateway.core.utils.parseParametersToObject(params, []),
+            body: body
+        };
+        
+        
+        return apiGatewayClient.makeRequest(discussionforumPostcommentsPostRequest, authType, additionalParams, config.apiKey);
+    };
+    
+    
+    apigClient.discussionforumPostdiscussionPost = function (params, body, additionalParams) {
+        if(additionalParams === undefined) { additionalParams = {}; }
+        
+        apiGateway.core.utils.assertParametersDefined(params, [], ['body']);
+        
+        var discussionforumPostdiscussionPostRequest = {
+            verb: 'post'.toUpperCase(),
+            path: pathComponent + uritemplate('/discussionforum/postdiscussion').expand(apiGateway.core.utils.parseParametersToObject(params, [])),
+            headers: apiGateway.core.utils.parseParametersToObject(params, []),
+            queryParams: apiGateway.core.utils.parseParametersToObject(params, []),
+            body: body
+        };
+        
+        
+        return apiGatewayClient.makeRequest(discussionforumPostdiscussionPostRequest, authType, additionalParams, config.apiKey);
+    };
+    
+    
+    apigClient.discussionforumPostdiscussionOptions = function (params, body, additionalParams) {
+        if(additionalParams === undefined) { additionalParams = {}; }
+        
+        apiGateway.core.utils.assertParametersDefined(params, [], ['body']);
+        
+        var discussionforumPostdiscussionOptionsRequest = {
+            verb: 'options'.toUpperCase(),
+            path: pathComponent + uritemplate('/discussionforum/postdiscussion').expand(apiGateway.core.utils.parseParametersToObject(params, [])),
+            headers: apiGateway.core.utils.parseParametersToObject(params, []),
+            queryParams: apiGateway.core.utils.parseParametersToObject(params, []),
+            body: body
+        };
+        
+        
+        return apiGatewayClient.makeRequest(discussionforumPostdiscussionOptionsRequest, authType, additionalParams, config.apiKey);
+    };
+    
+    
+    apigClient.discussionforumPostlikesPost = function (params, body, additionalParams) {
+        if(additionalParams === undefined) { additionalParams = {}; }
+        
+        apiGateway.core.utils.assertParametersDefined(params, [], ['body']);
+        
+        var discussionforumPostlikesPostRequest = {
+            verb: 'post'.toUpperCase(),
+            path: pathComponent + uritemplate('/discussionforum/postlikes').expand(apiGateway.core.utils.parseParametersToObject(params, [])),
+            headers: apiGateway.core.utils.parseParametersToObject(params, []),
+            queryParams: apiGateway.core.utils.parseParametersToObject(params, []),
+            body: body
+        };
+        
+        
+        return apiGatewayClient.makeRequest(discussionforumPostlikesPostRequest, authType, additionalParams, config.apiKey);
+    };
+    
+    
+    apigClient.discussionforumPostlikesOptions = function (params, body, additionalParams) {
+        if(additionalParams === undefined) { additionalParams = {}; }
+        
+        apiGateway.core.utils.assertParametersDefined(params, [], ['body']);
+        
+        var discussionforumPostlikesOptionsRequest = {
+            verb: 'options'.toUpperCase(),
+            path: pathComponent + uritemplate('/discussionforum/postlikes').expand(apiGateway.core.utils.parseParametersToObject(params, [])),
+            headers: apiGateway.core.utils.parseParametersToObject(params, []),
+            queryParams: apiGateway.core.utils.parseParametersToObject(params, []),
+            body: body
+        };
+        
+        
+        return apiGatewayClient.makeRequest(discussionforumPostlikesOptionsRequest, authType, additionalParams, config.apiKey);
+    };
+    
+    
+    apigClient.profileGet = function (params, body, additionalParams) {
+        if(additionalParams === undefined) { additionalParams = {}; }
+        
+        apiGateway.core.utils.assertParametersDefined(params, ['email'], ['body']);
+        
+        var profileGetRequest = {
+            verb: 'get'.toUpperCase(),
+            path: pathComponent + uritemplate('/profile').expand(apiGateway.core.utils.parseParametersToObject(params, [])),
+            headers: apiGateway.core.utils.parseParametersToObject(params, []),
+            queryParams: apiGateway.core.utils.parseParametersToObject(params, ['email']),
+            body: body
+        };
+        
+        
+        return apiGatewayClient.makeRequest(profileGetRequest, authType, additionalParams, config.apiKey);
     };
     
     
