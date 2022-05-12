@@ -106,11 +106,10 @@
                   };
           var body = "";
           var apigClient = apigClientFactory.newClient();
-                  apigClient.discussionforumGetdiscusionGet(params, body)
+                  apigClient.discussionforumGetdisGet(params, body)
                   .then(function(result){
-                    
                     console.log(result)
-                    var data=result.data.body;
+                    var data=result.data;
                     console.log("DATA",data);
                     
       			      var arr=[]
