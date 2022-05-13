@@ -36,6 +36,7 @@ def lambda_handler(event, context):
             }
             thread_list.append(document)
         print("1")
+        # print("sdflk",json.dumps((thread_list))
         valx = json.dumps(thread_list)
         return {
             'statusCode': 200,

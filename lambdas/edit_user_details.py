@@ -21,13 +21,12 @@ def lambda_handler(event, context):
     address = event['queryStringParameters']['address']
     email = event['queryStringParameters']['email']
     experience = event['queryStringParameters']['experience']
-    mobile = event['queryStringParameters']['mobile']
     name = event['queryStringParameters']['name']
     phone = event['queryStringParameters']['phone']
     skills = event['queryStringParameters']['skills']
-
     
-    print(email)
+    
+    print(email, access_token, address, experience, name, phone, skills)
     try:
         
         region = 'us-east-1'
@@ -40,7 +39,7 @@ def lambda_handler(event, context):
             'email': event['queryStringParameters']['email'],
         },
         AttributeUpdates={
-            'name': {
+            'Name': {
                 'Value': {name},
                 'Action': 'PUT'
             },
@@ -50,10 +49,6 @@ def lambda_handler(event, context):
             },
             'experience': {
                 'Value': {experience},
-                'Action': 'PUT'
-            },
-            'mobile': {
-                'Value': {mobile},
                 'Action': 'PUT'
             },
             'phone': {
@@ -71,7 +66,17 @@ def lambda_handler(event, context):
         },
         ReturnValues="UPDATED_NEW"
     )
-        print(res)
+        valx = {
+            "status": "updated"
+        }
+        val = {
+            'statusCode': 200,
+            'headers': {'Access-Control-Allow-Origin':'*'},
+            'body': json.dumps(valx),
+            'isBase64Encoded': False
+        }
+        print(val)
+        return val
     except:
 
         print("Error:", sys.exc_info()[0])

@@ -133,7 +133,7 @@
                   <hr>
                   <div class="row">
                     <div class="col-sm-12">
-                      <button class="btn btn-info" id="edit">Edit</button>
+                      <button class="btn btn-info" id="edit" onclick="edit_profile()">Edit</button>
                     </div>
                   </div>
                 </div>
@@ -178,6 +178,8 @@
       const urlParams = new URLSearchParams(queryString);
       const email = urlParams.get("email");
       const access_token = urlParams.get("access_token");
+      // store access token in local storage
+      localStorage.setItem("access_token", access_token);
 
       localStorage.setItem("email", email);
       
@@ -204,7 +206,7 @@
       }
 
       function edit_profile(email, access_token){
-        window.location.href = "PP_edit.html"+"?email="+email+"&access_token="+access_token;
+        window.location.href = "PP_edit.html"+"?email="+document.getElementById("email").innerHTML+"&access_token="+localStorage.getItem("access_token");
       }
       
 

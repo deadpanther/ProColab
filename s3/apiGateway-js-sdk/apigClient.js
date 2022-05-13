@@ -299,6 +299,42 @@ apigClientFactory.newClient = function (config) {
     };
     
     
+    apigClient.postlikesPost = function (params, body, additionalParams) {
+        if(additionalParams === undefined) { additionalParams = {}; }
+        
+        apiGateway.core.utils.assertParametersDefined(params, [], ['body']);
+        
+        var postlikesPostRequest = {
+            verb: 'post'.toUpperCase(),
+            path: pathComponent + uritemplate('/postlikes').expand(apiGateway.core.utils.parseParametersToObject(params, [])),
+            headers: apiGateway.core.utils.parseParametersToObject(params, []),
+            queryParams: apiGateway.core.utils.parseParametersToObject(params, []),
+            body: body
+        };
+        
+        
+        return apiGatewayClient.makeRequest(postlikesPostRequest, authType, additionalParams, config.apiKey);
+    };
+    
+    
+    apigClient.postlikesOptions = function (params, body, additionalParams) {
+        if(additionalParams === undefined) { additionalParams = {}; }
+        
+        apiGateway.core.utils.assertParametersDefined(params, [], ['body']);
+        
+        var postlikesOptionsRequest = {
+            verb: 'options'.toUpperCase(),
+            path: pathComponent + uritemplate('/postlikes').expand(apiGateway.core.utils.parseParametersToObject(params, [])),
+            headers: apiGateway.core.utils.parseParametersToObject(params, []),
+            queryParams: apiGateway.core.utils.parseParametersToObject(params, []),
+            body: body
+        };
+        
+        
+        return apiGatewayClient.makeRequest(postlikesOptionsRequest, authType, additionalParams, config.apiKey);
+    };
+    
+    
     apigClient.profileGet = function (params, body, additionalParams) {
         if(additionalParams === undefined) { additionalParams = {}; }
         

@@ -65,12 +65,7 @@ def lambda_handler(event, context):
         print(skills)
         print(access_token)
         print(email)
-        
-
-        val = {
-            'statusCode': 200,
-            'headers': {'Access-Control-Allow-Origin':'*'},
-            'body': json.dumps({
+        valx = {
                 "email" : email,
                 "name" : name,
                 "address" : address,
@@ -79,7 +74,12 @@ def lambda_handler(event, context):
                 "phone" : phone,
                 "skills" : skills,
                 "access_token" : access_token,
-            }),
+            }
+        
+        val = {
+            'statusCode': 200,
+            'headers': {'Access-Control-Allow-Origin':'*'},
+            'body': json.dumps(valx),
             'isBase64Encoded': False
         }
         print(val)
