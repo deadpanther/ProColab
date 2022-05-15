@@ -135,6 +135,10 @@
                     <div class="col-sm-12">
                       <button class="btn btn-info" id="edit" onclick="edit_profile()">Edit</button>
                     </div>
+                    <div class="col-sm-12">
+                      <p align="center"><input type="file" id = "myFile" class = "fa fa-cloud-upload" onchange="previewFile(this);" accept="application/pdf"></p><br><br>
+                      <button class="btn btn-info" id="upload" onclick="upload_pdf()">Upload</button>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -168,6 +172,23 @@
     </div>
 
     <script>
+      function previewFile(input) {
+  var reader = new FileReader();
+  name = input.files[0].name;
+  fileExt = name.split(".").pop();
+  var onlyname = name.replace(/\.[^/.]+$/, "");
+  var finalName = onlyname + "_" + Date.now() + "." + fileExt;
+  name = finalName;
+
+  reader.onload = function (e) {
+    var src = e.target.result;
+    var newImage = document.createElement("img");
+    newImage.src = src;
+    encoded = newImage.outerHTML;
+  }
+  reader.readAsDataURL(input.files[0]);
+}
+
       var data = {
         UserPoolId: _config.cognito.userPoolId,
         ClientId: _config.cognito.userPoolClientId
@@ -185,6 +206,7 @@
       
       console.log(localStorage.getItem("email"));
       localStorage.setItem("access_token", access_token);
+      console.log(localStorage.getItem("access_token"));
       const userData = {
         Username: email,
         Pool: userPool,
@@ -209,6 +231,53 @@
         window.location.href = "PP_edit.html"+"?email="+document.getElementById("email").innerHTML+"&access_token="+localStorage.getItem("access_token");
       }
       
+      function upload_pdf(eve){
+	alert("called")
+	var filesSelected = document.getElementById("myFile").files;
+//   var labels = document.getElementById("customlabels").value;
+//   var error = document.getElementById("error");
+
+  
+//   error.textContent=""
+
+
+    if (filesSelected.length > 0) {
+      var fileToLoad = filesSelected[0];
+
+      var fileReader = new FileReader();
+
+      fileReader.onload = function(fileLoadedEvent) {
+			var srcData = fileLoadedEvent.target.result; // <--- data: base64
+			console.log("Converted Base64 version is " + srcData);
+			var params = {
+				headers: {
+					param0: 'Accept:application/json',
+					}
+				};
+			var queryString = window.location.hash;
+			// console.log(queryString);
+			const urlParams = new URLSearchParams(queryString);
+			const access_token = localStorage.getItem("access_token");
+			console.log(access_token);
+      console.log(fileToLoad.name)
+      var solution = srcData.split("base64,")[1];
+      console.log(solution)
+
+      var body = JSON.stringify({"img": solution, "name":fileToLoad.name, "access_token": access_token, "email": localStorage.getItem("email")});
+      
+      var apigClient = apigClientFactory.newClient();
+      apigClient.resumeParserPost(params, body)
+      .then(function(result){
+        console.log('went to then')
+      }).catch( function(result){
+        console.log('went to catch')
+      });
+
+      }
+      fileReader.readAsDataURL(fileToLoad);
+    }
+  }
+  
 
 
       window.onload = function(){

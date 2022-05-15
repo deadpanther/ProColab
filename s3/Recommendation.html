@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Profile Page</title>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css">
+	<link rel="stylesheet" href="PP.css">
+  <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+  <script src="https://rawgit.com/aws/amazon-cognito-identity-js/master/dist/aws-cognito-sdk.min.js"></script>
+  <script src="https://rawgit.com/aws/amazon-cognito-identity-js/master/dist/amazon-cognito-identity.min.js"></script>
+  <script type="text/javascript" src="apiGateway-js-sdk/lib/axios/dist/axios.standalone.js"></script>
+  <script type="text/javascript" src="apiGateway-js-sdk/lib/CryptoJS/rollups/hmac-sha256.js"></script>
+  <script type="text/javascript" src="apiGateway-js-sdk/lib/CryptoJS/rollups/sha256.js"></script>
+  <script type="text/javascript" src="apiGateway-js-sdk/lib/CryptoJS/components/hmac.js"></script>
+  <script type="text/javascript" src="apiGateway-js-sdk/lib/CryptoJS/components/enc-base64.js"></script>
+  <script type="text/javascript" src="apiGateway-js-sdk/lib/url-template/url-template.js"></script>
+  <script type="text/javascript" src="apiGateway-js-sdk/lib/apiGatewayCore/sigV4Client.js"></script>
+  <script type="text/javascript" src="apiGateway-js-sdk/lib/apiGatewayCore/apiGatewayClient.js"></script>
+  <script type="text/javascript" src="apiGateway-js-sdk/lib/apiGatewayCore/simpleHttpClient.js"></script>
+  <script type="text/javascript" src="apiGateway-js-sdk/lib/apiGatewayCore/utils.js"></script>
+  <script type="text/javascript" src="apiGateway-js-sdk/apigClient.js"></script>
+  <script src="js/config.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
+  <script type="text/javascript" src="apiGateway-js-sdk/apigClient.js"></script>
+</head>
+<body>
+<div class="container">
+    <div class="main-body">
+    
+          <!-- Breadcrumb -->
+          <nav aria-label="breadcrumb" class="main-breadcrumb">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+              <li class="breadcrumb-item"><a href="javascript:void(0)">User</a></li>
+              <li class="breadcrumb-item active" aria-current="page">User Profile</li>
+            </ol>
+          </nav>
+          <!-- /Breadcrumb -->
+    
+          <form>
+            <div class="col-md-8">
+              <div class="card mb-3">
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <h6 class="mb-0">Skills required for the collaborator</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                      <input class="col-sm-9 text-secondary" type="text" id="skills" value=""></p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                  <a class="btn btn-info " onclick="getRecommendations()">Submit</a>
+                </div>
+              </div>   
+
+
+              <div id='tableHtml' style="border-collapse:separate; 
+              border-spacing:5em;"></div>
+        </div>
+    </div>
+
+    <script>
+
+    //   var data = {
+    //     UserPoolId: _config.cognito.userPoolId,
+    //     ClientId: _config.cognito.userPoolClientId
+    //   }
+    //   var userAttributes;
+    //   var userPool = new AmazonCognitoIdentity.CognitoUserPool(data);
+    //   var queryString = window.location.search;
+    //   const urlParams = new URLSearchParams(queryString);
+    //   const email = urlParams.get("email");
+    //   const access_token = urlParams.get("access_token");
+    //   // store access token in local storage
+    //   localStorage.setItem("access_token", access_token);
+
+    //   localStorage.setItem("email", email);
+      
+    //   console.log(localStorage.getItem("email"));
+    //   localStorage.setItem("access_token", access_token);
+    //   const userData = {
+    //     Username: email,
+    //     Pool: userPool,
+    //   };
+
+    //   const cognitoUser = new AmazonCognitoIdentity.CognitoUser(userData);
+    
+    function getRecommendations(){
+        var apigClient = apigClientFactory.newClient();
+        params = {
+            "skills": document.getElementById("skills").value,
+            "Access-Control-Allow-Origin": "*"
+        }
+        apigClient.recommendationsPost(params)
+        .then(function(result){
+            // Add success callback code here.
+            console.log("Promise success");
+            // save response to local storage
+            console.log(result);
+            createTable(result.data);
+            
+        }).catch( function(result){
+            // Add error callback code here.
+            console.log(result);
+        });
+    }
+    
+      function edit_profile(email, access_token){
+        window.location.href = "PP_edit.html"+"?email="+document.getElementById("email").innerHTML+"&access_token="+localStorage.getItem("access_token");
+      }
+      
+     
+  
+
+
+      window.onload = function(){
+        
+        if(cognitoUser != null){
+          console.log("HI");
+          console.log("RESULT", userAttributes);
+          document.getElementById('username').innerHTML = email;
+        
+        }else{
+          alert("User not logged in");
+          //redirect to login page
+          window.location.href = "login.html";
+        }
+        
+      }
+      
+
+      function createTable (data) {
+        console.log(Object.values(data));
+        var x = Object.values(data);
+        var html = "";
+        for (var i = 0; i < 10; i++){
+            html +="<tr>"+
+                    "<td>   "+ (i+1) + "   </td>"+
+                    "<td>   "+ x[i].name + "   </td>"+
+                    "<td>   "+ x[i].email + "   </td>"+
+                    "<td>   "+ x[i].skills + "   </td>"+
+                    "</tr>";
+        }
+        console.log(html);
+        $("#tableHtml").html(html);
+
+    }
+
+
+
+
+
+    </script>
+</body>
+</html>

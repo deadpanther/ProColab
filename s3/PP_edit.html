@@ -170,14 +170,18 @@
 
     <script>
       var apigClient = apigClientFactory.newClient();
-
+      var queryString = window.location.search;
+      var urlParams = new URLSearchParams(queryString);
+      var email = urlParams.get("email");
+      var access_token = urlParams.get("access_token");
+      localStorage.setItem("access_token", access_token);
+      localStorage.setItem("email", email);
       var data = {
         UserPoolId: _config.cognito.userPoolId,
         ClientId: _config.cognito.userPoolClientId
       }
+
       function edit_profile(){
-        const urlParams = new URLSearchParams(queryString);
-        var email = urlParams.get("email");
         var name = document.getElementById('name').value;
         var headline = document.getElementById('headline').value;
         var phone = document.getElementById('phone').value;
@@ -193,9 +197,7 @@
           address: address,
           skills: skills,
           experience: experience
-        }
-
-       
+        };
         apigClient.profileEditProfilePut(params)
         .then(function(result){
           // Add success callback code here.
@@ -203,6 +205,7 @@
           // save response to local storage
           userAttributes = result;
           console.log(userAttributes);
+          window.location.href = "PP.html"+"?email="+localStorage.getItem("email")+"&access_token="+localStorage.getItem("access_token");
         }).catch( function(result){
           // Add error callback code here.
           console.log(result);
@@ -214,21 +217,6 @@
       var userPool = new AmazonCognitoIdentity.CognitoUserPool(data);
       console.log(userPool);
       
-      //get email field from window hash
-      var queryString = window.location.search;
-      // console.log(queryString);
-      const urlParams = new URLSearchParams(queryString);
-      const email = urlParams.get("email");
-      const access_token = urlParams.get("access_token");
-
-      localStorage.setItem("email", email);
-      // const authenticationDetails = new AmazonCognitoIdentity.AuthenticationDetails(
-      //   {
-      //     Username: email,
-      //     Password: "",
-      // );
-      //   },
-      console.log(localStorage.getItem("email"));
       const userData = {
         Username: email,
         Pool: userPool,

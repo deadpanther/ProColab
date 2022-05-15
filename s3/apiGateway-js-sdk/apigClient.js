@@ -281,6 +281,24 @@ apigClientFactory.newClient = function (config) {
     };
     
     
+    apigClient.nextRecommendationsOptions = function (params, body, additionalParams) {
+        if(additionalParams === undefined) { additionalParams = {}; }
+        
+        apiGateway.core.utils.assertParametersDefined(params, [], ['body']);
+        
+        var nextRecommendationsOptionsRequest = {
+            verb: 'options'.toUpperCase(),
+            path: pathComponent + uritemplate('/nextRecommendations').expand(apiGateway.core.utils.parseParametersToObject(params, [])),
+            headers: apiGateway.core.utils.parseParametersToObject(params, []),
+            queryParams: apiGateway.core.utils.parseParametersToObject(params, []),
+            body: body
+        };
+        
+        
+        return apiGatewayClient.makeRequest(nextRecommendationsOptionsRequest, authType, additionalParams, config.apiKey);
+    };
+    
+    
     apigClient.postDiscussionThreadOptions = function (params, body, additionalParams) {
         if(additionalParams === undefined) { additionalParams = {}; }
         
@@ -374,13 +392,13 @@ apigClientFactory.newClient = function (config) {
     apigClient.profileEditProfilePut = function (params, body, additionalParams) {
         if(additionalParams === undefined) { additionalParams = {}; }
         
-        apiGateway.core.utils.assertParametersDefined(params, ['experience', 'access_token', 'email', 'name', 'address', 'phone', 'skills'], ['body']);
+        apiGateway.core.utils.assertParametersDefined(params, ['experience', 'access_token', 'headline', 'email', 'name', 'address', 'phone', 'skills'], ['body']);
         
         var profileEditProfilePutRequest = {
             verb: 'put'.toUpperCase(),
             path: pathComponent + uritemplate('/profile/edit_profile').expand(apiGateway.core.utils.parseParametersToObject(params, [])),
             headers: apiGateway.core.utils.parseParametersToObject(params, []),
-            queryParams: apiGateway.core.utils.parseParametersToObject(params, ['experience', 'access_token', 'email', 'name', 'address', 'phone', 'skills']),
+            queryParams: apiGateway.core.utils.parseParametersToObject(params, ['experience', 'access_token', 'headline', 'email', 'name', 'address', 'phone', 'skills']),
             body: body
         };
         
@@ -407,6 +425,24 @@ apigClientFactory.newClient = function (config) {
     };
     
     
+    apigClient.recommendationsPost = function (params, body, additionalParams) {
+        if(additionalParams === undefined) { additionalParams = {}; }
+        
+        apiGateway.core.utils.assertParametersDefined(params, ['skills'], ['body']);
+        
+        var recommendationsPostRequest = {
+            verb: 'post'.toUpperCase(),
+            path: pathComponent + uritemplate('/recommendations').expand(apiGateway.core.utils.parseParametersToObject(params, [])),
+            headers: apiGateway.core.utils.parseParametersToObject(params, []),
+            queryParams: apiGateway.core.utils.parseParametersToObject(params, ['skills']),
+            body: body
+        };
+        
+        
+        return apiGatewayClient.makeRequest(recommendationsPostRequest, authType, additionalParams, config.apiKey);
+    };
+    
+    
     apigClient.recommendationsOptions = function (params, body, additionalParams) {
         if(additionalParams === undefined) { additionalParams = {}; }
         
@@ -422,6 +458,42 @@ apigClientFactory.newClient = function (config) {
         
         
         return apiGatewayClient.makeRequest(recommendationsOptionsRequest, authType, additionalParams, config.apiKey);
+    };
+    
+    
+    apigClient.resumeParserPost = function (params, body, additionalParams) {
+        if(additionalParams === undefined) { additionalParams = {}; }
+        
+        apiGateway.core.utils.assertParametersDefined(params, [], ['body']);
+        
+        var resumeParserPostRequest = {
+            verb: 'post'.toUpperCase(),
+            path: pathComponent + uritemplate('/resume-parser').expand(apiGateway.core.utils.parseParametersToObject(params, [])),
+            headers: apiGateway.core.utils.parseParametersToObject(params, []),
+            queryParams: apiGateway.core.utils.parseParametersToObject(params, []),
+            body: body
+        };
+        
+        
+        return apiGatewayClient.makeRequest(resumeParserPostRequest, authType, additionalParams, config.apiKey);
+    };
+    
+    
+    apigClient.resumeParserOptions = function (params, body, additionalParams) {
+        if(additionalParams === undefined) { additionalParams = {}; }
+        
+        apiGateway.core.utils.assertParametersDefined(params, [], ['body']);
+        
+        var resumeParserOptionsRequest = {
+            verb: 'options'.toUpperCase(),
+            path: pathComponent + uritemplate('/resume-parser').expand(apiGateway.core.utils.parseParametersToObject(params, [])),
+            headers: apiGateway.core.utils.parseParametersToObject(params, []),
+            queryParams: apiGateway.core.utils.parseParametersToObject(params, []),
+            body: body
+        };
+        
+        
+        return apiGatewayClient.makeRequest(resumeParserOptionsRequest, authType, additionalParams, config.apiKey);
     };
     
 
