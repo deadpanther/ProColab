@@ -6,6 +6,8 @@
 	<title>Profile Page</title>
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css">
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
 	<link rel="stylesheet" href="PP.css">
   <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
   <script src="https://rawgit.com/aws/amazon-cognito-identity-js/master/dist/aws-cognito-sdk.min.js"></script>
@@ -26,21 +28,59 @@
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
   <script type="text/javascript" src="apiGateway-js-sdk/apigClient.js"></script>
+  <style>
+  ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #333;
+}
+
+li {
+  float: left;
+}
+
+li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+li a:hover {
+  background-color: #111;
+}
+
+  .heading{ color: #5A2C84; text-align: center; font-family: "Monaco", monospace; font-weight: bold; } table, td, th { border: 1px solid #ddd; text-align: left; font-size: 11px; } th{ background-color: #5A2C84; color: white; text-transform: uppercase; } table { border-collapse: collapse; width: 100%; } th, td { padding: 15px; } .dataTables_wrapper .dt-buttons { padding-left: 50px; }</style>
 </head>
 <body>
+  <div class="w3-top">
+    <div class="w3-bar w3-white w3-wide w3-padding w3-card">
+      <a href="#home" class="w3-bar-item w3-button"><b>ProCollab</b></a>
+      <!-- Float links to the right. Hide them on small screens -->
+      <div class="w3-right w3-hide-small">
+        <button  class="w3-bar-item w3-button"  onclick="goToHomePage()">Home</a>
+        <button  class="w3-bar-item w3-button" onclick="goToRecommendationPage()">Recommendations</a>
+        <button  class="w3-bar-item w3-button" onclick="goToProfilePage()">Profile</a>
+        <button  class="w3-bar-item w3-button" onclick="goToDiscussionPage()">Discussion Forum</a>
+          <button  class="w3-bar-item w3-button" onclick="goToLoginPage()">Signout</a>
+
+      </div>
+    </div>
+  </div>
 <div class="container">
+
+  
+  
+
     <div class="main-body">
-    
-          <!-- Breadcrumb -->
-          <nav aria-label="breadcrumb" class="main-breadcrumb">
-            <ol class="breadcrumb">
-              <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-              <li class="breadcrumb-item"><a href="javascript:void(0)">User</a></li>
-              <li class="breadcrumb-item active" aria-current="page">User Profile</li>
-            </ol>
-          </nav>
-          <!-- /Breadcrumb -->
-    
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
           <form>
             <div class="col-md-8">
               <div class="card mb-3">
@@ -63,8 +103,7 @@
               </div>   
 
 
-              <div id='tableHtml' style="border-collapse:separate; 
-              border-spacing:5em;"></div>
+              <div id='tableHtml'></div>
         </div>
     </div>
 
@@ -76,14 +115,12 @@
     //   }
     //   var userAttributes;
     //   var userPool = new AmazonCognitoIdentity.CognitoUserPool(data);
-    //   var queryString = window.location.search;
-    //   const urlParams = new URLSearchParams(queryString);
-    //   const email = urlParams.get("email");
-    //   const access_token = urlParams.get("access_token");
-    //   // store access token in local storage
-    //   localStorage.setItem("access_token", access_token);
-
-    //   localStorage.setItem("email", email);
+    var queryString = window.location.search;
+      var urlParams = new URLSearchParams(queryString);
+      var email = urlParams.get("email");
+      var access_token = urlParams.get("access_token");
+      localStorage.setItem("access_token", access_token);
+      localStorage.setItem("email", email);
       
     //   console.log(localStorage.getItem("email"));
     //   localStorage.setItem("access_token", access_token);
@@ -94,6 +131,24 @@
 
     //   const cognitoUser = new AmazonCognitoIdentity.CognitoUser(userData);
     
+    function goToProfilePage() {
+      window.location.href = "PP.html"+"?email="+localStorage.getItem("email")+"&access_token="+localStorage.getItem("access_token");
+    }
+
+    function goToRecommendationPage() {
+      window.location.href = "Recommendation.html"+"?email="+localStorage.getItem("email")+"&access_token="+localStorage.getItem("access_token");
+    }
+
+    function goToDiscussionPage() {
+      window.location.href = "discussionForum.html"+"?email="+localStorage.getItem("email")+"&access_token="+localStorage.getItem("access_token");
+    }
+    function goToLoginPage(){
+      window.location.href = "login.html";
+    }
+    function goToHomePage(){
+      window.location.href = "index.html"+"?email="+localStorage.getItem("email")+"&access_token="+localStorage.getItem("access_token");
+    }
+
     function getRecommendations(){
         var apigClient = apigClientFactory.newClient();
         params = {

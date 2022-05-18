@@ -7,8 +7,8 @@ import requests
 # from requests_aws4auth import AWS4Auth
 
 awsRegion = 'us-east-1'
-accessID = 'AKIA5HYBIAG5IXDQEBPC'
-secretKey = '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'
+accessID = ' '
+secretKey = '  '
 
 dbObject = boto3.resource('dynamodb',region_name=awsRegion, aws_access_key_id=accessID, aws_secret_access_key=secretKey)
 dbtable = dbObject.Table('UserData')
@@ -20,6 +20,7 @@ def lambda_handler(event, context):
     access_token = event['queryStringParameters']['access_token']
     address = event['queryStringParameters']['address']
     email = event['queryStringParameters']['email']
+    headline = event['queryStringParameters']['headline']
     experience = event['queryStringParameters']['experience']
     name = event['queryStringParameters']['name']
     phone = event['queryStringParameters']['phone']
@@ -39,7 +40,7 @@ def lambda_handler(event, context):
             'email': event['queryStringParameters']['email'],
         },
         AttributeUpdates={
-            'Name': {
+            'name': {
                 'Value': {name},
                 'Action': 'PUT'
             },
@@ -53,6 +54,10 @@ def lambda_handler(event, context):
             },
             'phone': {
                 'Value': {phone},
+                'Action': 'PUT'
+            },
+            'headline': {
+                'Value': {headline},
                 'Action': 'PUT'
             },
             'skills': {

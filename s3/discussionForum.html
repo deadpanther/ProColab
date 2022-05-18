@@ -7,6 +7,8 @@
       <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
       <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css">
       <!-- <link rel="stylesheet" href="PP.css"> -->
+      <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
       <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
       <script src="https://rawgit.com/aws/amazon-cognito-identity-js/master/dist/aws-cognito-sdk.min.js"></script>
       <script src="https://rawgit.com/aws/amazon-cognito-identity-js/master/dist/amazon-cognito-identity.min.js"></script>
@@ -31,16 +33,28 @@
    </head>
    </head>
    <body onload="getThreads()">
+      <div class="w3-top">
+         <div class="w3-bar w3-white w3-wide w3-padding w3-card">
+           <a href="#home" class="w3-bar-item w3-button"><b>ProCollab</b></a>
+           <!-- Float links to the right. Hide them on small screens -->
+           <div class="w3-right w3-hide-small">
+             <button  class="w3-bar-item w3-button"  onclick="goToHomePage()">Home</a>
+             <button  class="w3-bar-item w3-button" onclick="goToRecommendationPage()">Recommendations</a>
+             <button  class="w3-bar-item w3-button" onclick="goToProfilePage()">Profile</a>
+             <button  class="w3-bar-item w3-button" onclick="goToDiscussionPage()">Discussion Forum</a>
+               <button  class="w3-bar-item w3-button" onclick="goToLoginPage()">Signout</a>
+             
+           </div>
+         </div>
+       </div>
       <div class="container">
+
+         
+          
       <div class="main-body">
-      <!-- Breadcrumb -->
-      <nav aria-label="breadcrumb" class="main-breadcrumb">
-         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-            <li class="breadcrumb-item"><a href="discussionForum.html">Discussion</a></li>
-         </ol>
-      </nav>
-      <!-- /Breadcrumb -->
+         <br>
+         <br>
+         <br>
       <h1>Discussion Forum</h1>
       <div class="Get" id="threads">
       </div>
@@ -75,7 +89,29 @@
 
    </body>
    <script>
+      var queryString = window.location.search;
+      var urlParams = new URLSearchParams(queryString);
+      var email = urlParams.get("email");
+      var access_token = urlParams.get("access_token");
+      localStorage.setItem("access_token", access_token);
+      localStorage.setItem("email", email);
+    function goToProfilePage() {
+      window.location.href = "PP.html"+"?email="+localStorage.getItem("email")+"&access_token="+localStorage.getItem("access_token");
+    }
 
+    function goToRecommendationPage() {
+      window.location.href = "Recommendation.html"+"?email="+localStorage.getItem("email")+"&access_token="+localStorage.getItem("access_token");
+    }
+
+    function goToDiscussionPage() {
+      window.location.href = "discussionForum.html"+"?email="+localStorage.getItem("email")+"&access_token="+localStorage.getItem("access_token");
+    }
+    function goToLoginPage(){
+      window.location.href = "login.html";
+    }
+    function goToHomePage(){
+      window.location.href = "index.html"+"?email="+localStorage.getItem("email")+"&access_token="+localStorage.getItem("access_token");
+    }
       console.log("No access " +  localStorage.getItem('access_token'));
       function postThread(evt)
       {
@@ -117,32 +153,31 @@
                     console.log("DATA",data);
                     
       			      var arr=[]
-                for(var i=0;i<data.length;i++){
-                console.log("getting")
-      					var outputhtml ="";
-      					outputhtml += '<div class='+i+' style="background-color:#b0d5cb; border: 2px solid white;">'
-      					outputhtml += '<h3 id="userid'+i+'" style="display: none;">'+data[i].userid+'</h3><br>'
-      					outputhtml += '<h3 id= "likes'+i+'" style="color: black; text-align:left"> Likes-:'+data[i].likes+'</h3><br>'
-      					outputhtml += '<h3 id= "title'+i+'" style="color: black">'+data[i].Thread_Title+'</h3><br>'
-      					outputhtml += '<h3 id= "user'+i+'" style="color: black">'+data[i].userName+'</h3><br>'
-      					outputhtml += '<h3 id= "timestamp'+i+'" style="color: black">'+data[i].timestamp+'</h3><br>'
-      					outputhtml += '<h3 style="color: black">'+data[i].Thread_content+'</h3><br>'
-      					outputhtml += '<form>'
-                outputhtml += '<label for="comment" style="color: black">comment:</label>'
-                outputhtml += '<textarea id="comment'+i+'" name="Thread" rows="2" cols="50"></textarea>'
-                outputhtml += '<input type="button" id='+i+' style="height:50px;width:108px" value="comment" onclick="postComment('+i+')">'
-      					outputhtml += '<input type="button" id="Like'+i+'" style="height:50px;width:108px" value="Like" onclick="postLikes('+i+')">'
-      					outputhtml += '</form>'
-      					outputhtml += '<h2 style="color: black"> Comments-:</h2>'
-      					for(var j=0; j< data[i].comments.length; j++)
-      					{
-      					outputhtml += '<h3 style="color: black">'+data[i].comments[j].comment+'</h3>'+'<h3 style="color: black; text-align:right">'+data[i].comments[j].UserNameOfComment+'</h3><br>'
-      					}
-      					outputhtml += '</div>'
-                          outputhtml += '</div></div>'
-      					arr.push(outputhtml)
-      					
-                    }
+                     for(var i=0;i<data.length;i++){
+					var outputhtml ="";
+					outputhtml += '<div class='+i+' style="background-color:#0366fc; border: 5px solid black;">'
+					outputhtml += '<h3 id="userid'+i+'" style="display: none;">'+data[i].userid+'</h3><br>'
+					outputhtml += '<h3 id= "title'+i+'" style="color: black">'+data[i].Thread_Title+'</h3><br>'
+					outputhtml += '<h3 id= "user'+i+'" style="color: black">'+data[i].userName+'</h3><br>'
+					outputhtml += '<h3 id= "timestamp'+i+'" style="color: black">'+data[i].timestamp+'</h3><br>'
+					outputhtml += '<h3 style="color: black">'+data[i].Thread_content+'</h3><br>'
+					outputhtml += '<form>'
+                    outputhtml += '<label for="comment" style="color: black">comment:</label>'
+                    outputhtml += '<textarea id="comment'+i+'" name="Thread" rows="2" cols="50"></textarea>'
+                    outputhtml += '<input type="button" id='+i+' style="height:50px;width:108px" value="comment" onclick="postComment('+i+')">'
+					outputhtml += '<input type="button" id="Like'+i+'" style="height:50px;width:108px" value="Like" onclick="postLikes('+i+')">'
+					outputhtml += '</form>'
+               outputhtml += '<h3 id= "likes'+i+'" style="color: black; text-align:left; font-size: 15px"> Likes-'+data[i].likes+'</h3><br>'
+					outputhtml += '<h2 style="color: black; font-size: 15px"> Comments-</h2>'
+					for(var j=0; j< data[i].comments.length; j++)
+					{
+					outputhtml += '<h3 style="color: black">'+data[i].comments[j].comment+'</h3>'+'<h3 style="color: black; text-align:right; font-size: 15px;">'+data[i].comments[j].UserNameOfComment+'</h3><br>'
+					}
+					outputhtml += '</div>'
+                    outputhtml += '</div></div>'
+					arr.push(outputhtml)
+					
+              }
       			      console.log(arr);
                     document.getElementById("threads").innerHTML = arr;
       			  document.getElementById("threads").style.display="block";

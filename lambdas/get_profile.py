@@ -7,8 +7,8 @@ import requests
 # from requests_aws4auth import AWS4Auth
 
 awsRegion = 'us-east-1'
-accessID = 'AKIA5HYBIAG5IXDQEBPC'
-secretKey = '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'
+accessID = ' '
+secretKey = '  '
 
 dbObject = boto3.resource('dynamodb',region_name=awsRegion, aws_access_key_id=accessID, aws_secret_access_key=secretKey)
 dbtable = dbObject.Table('UserData')
@@ -42,10 +42,6 @@ def lambda_handler(event, context):
         except:
             experience = 'None'
         try:
-            mobile = list(user_details.get('Item').get('mobile'))
-        except:
-            mobile = 'None'
-        try:
             phone = list(user_details.get('Item').get('phone'))
         except:
             phone = 'None'
@@ -54,24 +50,20 @@ def lambda_handler(event, context):
         except:
             skills = 'None'
         try:
+            headline = list(user_details.get('Item').get('headline'))
+        except:
+            headline = 'None'
+        try:
             access_token = list(user_details.get('Item').get('access_token'))
         except:
             access_token = ''
-        print(name)
-        print(address)
-        print(experience)
-        print(mobile)
-        print(phone)
-        print(skills)
-        print(access_token)
-        print(email)
         valx = {
                 "email" : email,
                 "name" : name,
                 "address" : address,
                 "experience" : experience,
-                "mobile" : mobile,
                 "phone" : phone,
+                "headline" : headline,
                 "skills" : skills,
                 "access_token" : access_token,
             }
