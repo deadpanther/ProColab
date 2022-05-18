@@ -3,10 +3,8 @@ A collaboration platform for students of various universities to work on project
 
 ## Authors
 
-It's a joint work between Aditya, Vijay and Yash
-
 - [Neel Shah](https://www.github.com/deadpanther)
-- [Vishal Shah](https://www.github.com/)
+- [Vishal Shah](https://www.github.com/VishalShah1999)
 - [Ansh Desai](https://www.github.com/)
 - [Goutham Krishna Kommineni](https://www.github.com/)
 
