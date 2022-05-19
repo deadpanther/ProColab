@@ -18,7 +18,7 @@ As we know this era is all about building online connections with everyone throu
 ![alt text](https://github.com/deadpanther/ProColab/blob/main/images/system_arch.png?raw=true)
 
 ## Visual Demonstration
-<iframe width="1280" height="720" src="https://www.youtube.com/embed/E4SdHwYsWeQ" title="ProColab Demo" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+[<img src="https://i.ytimg.com/vi/E4SdHwYsWeQ/maxresdefault.jpg" width="50%">](https://www.youtube.com/watch?v=E4SdHwYsWeQ "ProColab Demo")
 
 ## AWS Services
 - AWS Cognito
